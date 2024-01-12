@@ -1,4 +1,4 @@
-# icta-project-inventory
+# project-inventory
 
 
 # Local Set up
