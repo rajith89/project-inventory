@@ -1,0 +1,170 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+<div th:fragment="navbar">
+    <nav class="pcoded-navbar">
+        <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+        <div class="pcoded-inner-navbar main-menu">
+            <div class="">
+                <div class="main-menu-header">
+                    <div class="user-details">
+                        <span id="more-details" style="font-size: 14px;">ICT Procurements 2021 - 2022</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Category</div>
+            <ul class="pcoded-item pcoded-left-item">
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/admin') ? 'active':''}">
+                    <a th:href="@{/admin}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Dashboard</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/institution') ? 'active':''}">
+                    <a th:href="@{/institution/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">Institution Details</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/projectPlan') ? 'active':''}">
+                    <a th:href="@{/projectPlans/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">Planned Projects</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/existingsolution') ? 'active':''}">
+                    <a th:href="@{/existingsolution/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">Existing IT Solutions</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/existingproject') ? 'active':''}">
+                    <a th:href="@{/existingproject/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">Solution Improvements</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/newproject') ? 'active':''}">
+                    <a th:href="@{/newproject/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">New Projects</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/governmentservices') ? 'active':''}">
+                    <a th:href="@{/governmentservices/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">Government Services</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li class="pcoded-hasmenu">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i></span>
+                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Compliances</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/regulaterinfo') ? 'active':''}">
+                            <a th:href="@{/regulaterinfo/list}" class="waves-effect waves-dark">
+                                <i class="ti-angle-right" style="font-size: 10px;"></i>
+                                <span class="pcoded-micon"></span>
+                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Compliances</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>
+                        <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/compliance/file') ? 'active':''}">
+                            <a th:href="@{/compliance/file/list}" class="waves-effect waves-dark">
+                                <i class="ti-angle-right" style="font-size: 10px;"></i>
+                                <span class="pcoded-micon"></span>
+                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Compliances Files</span>
+                                <span class="pcoded-mcaret"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/itUnit') ? 'active':''}">
+                    <a th:href="@{/itUnit/}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">IT HR Capacity</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/feedback') ? 'active':''}">
+                    <a th:href="@{/feedback/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">Feedback</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div th:if="${isAdmin}">
+            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">User Management</div>
+            <ul class="pcoded-item pcoded-left-item">
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/user') ? 'active':''}">
+                    <a th:href="@{/user/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">User Details</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Master Data</div>
+            <ul class="pcoded-item pcoded-left-item">
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ministryManagement') ? 'active':''}">
+                    <a th:href="@{/ministryManagement/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext"
+                              data-i18n="nav.form-components.main">Ministry</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+                <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/createInstitute') ? 'active':''}">
+                    <a th:href="@{/createInstitute/list}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Institution</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
+
+            </ul>
+
+            </div>
+        </div>
+    </nav>
+</div>
+</html>

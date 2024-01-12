@@ -1,0 +1,264 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- <link rel="stylesheet" type="text/css" media="all" href="css/Base.css" th:href="@{/resources/css/Base.css}" />
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script> -->
+    <title>Project Inventory </title>
+    <!-- <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" /> -->
+
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/2.0.2/umd/popper.min.js}"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{/resources/assets/img/ICTA.jpg}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/bootstrap/css/bootstrap.min.css}">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/themify-icons/themify-icons.css}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/icofont/css/icofont.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/jquery.mCustomScrollbar.css}">
+
+</head>
+
+<body>
+
+
+<!-- Pre-loader end -->
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img class="img-fluid" th:src="@{/resources/img/ICTA_banner.png}" style="width: 120px"/>
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+
+                        <li class="user-profile header-notification">
+                            <a href="#!" class="waves-effect waves-light">
+                                <!-- <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
+                                <span><i class="ti-user"></i></span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+
+
+                                <li class="waves-effect waves-light">
+                                    <a th:href="@{/logout}">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+                <div th:if="${!isAdmin}">
+                    <div th:replace="fragments/navbaruser :: navbar"></div>
+                </div>
+                <div th:if="${isAdmin}">
+                    <div th:replace="fragments/navbar :: navbar"></div>
+                </div>
+
+                <div class="pcoded-content">
+                    <!-- Page-header start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Compliances</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page-header end -->
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+
+                                <!-- Page body start -->
+                                <div class="page-body">
+
+                                    <div th:if="${message}" th:text="${message}"
+                                         th:class="${'alert ' + alertClass}"/>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- Basic Form Inputs card start -->
+                                            <div class="card">
+
+                                                <div class="card-block">
+                                                    <h4 class="sub-title">Please upload related regualtions (if available)
+                                                        File Name</h4>
+
+                                                    <div class="alert alert-danger" role="alert">The file type is not
+                                                        supported.
+                                                    </div>
+
+                                                    <form th:action="@{/compliance/file/add}"
+                                                          enctype="multipart/form-data"
+                                                          method="post" onsubmit="return Validate(this);">
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Upload File</label>
+                                                            <div class="col-sm-10">
+                                                                <input id="file-upload" required type="file"
+                                                                       name="files"
+                                                                       class="form-control">
+                                                                <div class="Warning-msg-section">
+                                                                    <span><i>* The maximum supported file size is 25MB and supported file types are .PDF, .PNG, .JPG, .JPEG, .CSV, .DOC, .DOCX, .PPT, .PPTX, .PSD, .ZIP, .XLSX and .XLSM only.</i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Textarea</label>
+                                                            <div class="col-sm-10">
+                                                                <textarea rows="5" cols="5" class="form-control"
+                                                                placeholder="Default textarea"></textarea>
+                                                            </div>
+                                                        </div> -->
+
+                                                        <div class="row m-t-30">
+                                                            <div class="col-md-12">
+                                                                <button th:text="Submit" type="submit"
+                                                                        class="btn btn-primary waves-effect waves-light upload-content">
+                                                                    Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-ui/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/popper.js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js}"></script>
+<!-- waves js -->
+<script th:src="@{/resources/assets/pages/waves/js/waves.min.js}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/SmoothScroll.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<!-- Custom js -->
+<script th:src="@{/resources/assets/js/pcoded.min.js}"></script>
+<script th:src="@{/resources/assets/js/vertical-layout.min.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/script.js}"></script>
+
+<script type="text/javascript">
+    //$(document).ready(function() {
+    $('.alert').alert().hide();
+
+    var _validFileExtensions = [".jpg", ".jpeg", ".png", ".pdf", ".csv", ".doc", ".docx", ".ppt", ".pptx", ".psd", ".zip", ".xlsx", ".xlsm"];
+
+    function Validate(oForm) {
+        var arrInputs = oForm.getElementsByTagName("input");
+        for (var i = 0; i < arrInputs.length; i++) {
+            var oInput = arrInputs[i];
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
+                        }
+                    }
+
+                    if (!blnValid) {
+                        $('.alert').alert().show();
+                        $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+                            $(".alert").slideUp(500);
+                        });
+                        //alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    //});
+
+</script>
+</body>
+</html>

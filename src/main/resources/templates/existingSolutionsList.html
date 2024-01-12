@@ -1,0 +1,366 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Project Inventory </title>
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{/resources/img/icta.ico}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/bootstrap/css/bootstrap.min.css}">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/themify-icons/themify-icons.css}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/icofont/css/icofont.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/jquery.mCustomScrollbar.css}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img class="img-fluid" th:src="@{/resources/img/ICTA_banner.png}" style="width: 120px"/>
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+
+                        <li class="user-profile header-notification">
+                            <a href="#!" class="waves-effect waves-light">
+                                <!-- <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
+                                <span><i class="ti-user"></i></span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+
+                                <li class="waves-effect waves-light">
+                                    <a th:href="@{/logout}">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+                <div sec:authorize="hasAuthority('USER')">
+                    <div th:replace="fragments/navbaruser :: navbar"></div>
+                </div>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <div th:replace="fragments/navbar :: navbar"></div>
+                </div>
+
+                <div class="pcoded-content">
+                    <!-- Page-header start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Existing IT Solutions</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page-header end -->
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+
+                                <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
+
+                                <!-- Page body start -->
+                                <div class="page-body">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <div class="card">
+                                                <div class="card-header" style="padding-bottom:5px">
+
+                                                    <div class="card-header-left">
+                                                        <h4 class="sub-title" style="font-weight: bold">Existing IT
+                                                            solution implementations RELATED to the Procurements planned
+                                                            for 2021/ 2023</h4>
+                                                    </div>
+
+                                                    <div th:if="${!isAdmin}">
+                                                        <div class="card-header-right">Add New
+                                                            <a th:href="@{/existingsolution/}">
+                                                                <button class="btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
+                                                                    <i class="ti-plus"></i></button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-block table-border-style">
+                                                    <!--<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/></div>-->
+                                                    <div class="table-responsive">
+
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Solution Name</th>
+                                                                <th>Created Date</th>
+                                                                <th>State</th>
+                                                                <!--<th sec:authorize="hasAuthority('ADMIN')">Status</th>-->
+                                                                <th>Action</th>
+                                                                <!--<th sec:authorize="hasAuthority('ADMIN')">Review</th>-->
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            <tr th:each="solution : ${existingSolutions}">
+
+                                                                <td th:text="${solution.solutionName}"></td>
+                                                                <td th:text="${#dates.format(solution.createdDate, 'dd-MM-yyyy')}"></td>
+                                                                <td sec:authorize="hasAnyAuthority('USER','ADMIN')" th:text="${solution.state}"></td>
+                                                                <!--<td sec:authorize="hasAuthority('ADMIN')">-->
+                                                                    <!--<span th:if="${solution.status == 0}">Pending</span>-->
+                                                                    <!--<span th:if="${solution.status == 1}">Approved</span>-->
+                                                                    <!--<span th:if="${solution.status == 2}">Rejected</span>-->
+                                                                <!--</td>-->
+                                                                <td>
+
+                                                                    <a th:if="${!isAdmin}"
+                                                                       th:href="@{/existingsolution/edit/{id}(id=${solution.id})}">
+                                                                        <button th:text="Edit" type="submit"
+                                                                                class="btn btn-info waves-effect waves-light">
+                                                                            Edit
+                                                                        </button>
+                                                                    </a>
+
+
+                                                                    <a th:if="${isAdmin}"
+                                                                       th:href="@{/existingsolution/edit/{id}(id=${solution.id})}">
+                                                                        <button th:text="View" type="submit"
+                                                                                class="btn btn-info waves-effect waves-light">
+                                                                            Edit
+                                                                        </button>
+                                                                    </a>
+
+                                                                    <button type="button" th:if="${!isAdmin}"
+                                                                            th:id="${solution.id}"
+                                                                            class="btn btn-info waves-effect waves-light delConfirm"
+                                                                            data-toggle="modal"
+                                                                            data-target="#deleteModal">Delete
+                                                                    </button>
+                                                                </td>
+                                                                <!--<td sec:authorize="hasAuthority('ADMIN')">-->
+                                                                    <!--<button  th:id="${solution.id}" data-toggle="modal" value="1" data-target="#reviewModal" type="button" class="btn btn-outline-success btn-sm review-modal">Approve</button>-->
+                                                                    <!--<button th:id="${solution.id}" data-toggle="modal" value="2" data-target="#reviewModal" type="button" class="btn btn-outline-danger btn-sm review-modal">Reject</button>-->
+                                                                <!--</td>-->
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog" style="position: relative;top: 40%;transform: translateY(-50%);">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this record?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="deleteIt" type="button" class="btn btn-default" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="reviewModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Comments</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                <form class="msg_form" onsubmit="return false;" role="form">
+                    <textarea class="form-control comment-box" id="comments" rows="5" cols="50" placeholder="ICTA Feedback Comment"></textarea>
+                </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="reviewIt" type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        deleteId = null;
+        reviewId= null;
+        reviewAction = null
+        $(".delConfirm").click(function () {
+            deleteId = this.id;
+        });
+
+        $("#deleteIt").click(function () {
+            var element = document.createElement('a');
+            element.setAttribute('href', '/existingsolution/delete/' + deleteId + '/');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        });
+
+        $(".review-modal").click(function () {
+            reviewId = this.id;
+            reviewAction = $(this).attr("value");
+        });
+
+        $("#reviewIt").click(function () {
+
+            var comment = $(this).find('.comment-box').val();
+
+            var data = {
+                'id' :  reviewId,
+                'userAction' : reviewAction,
+                'userComment' : $("#comments").val()
+            }
+            $.ajax({
+                url: '/existingsolution/review',
+                type: 'POST',
+                dateType: 'json',
+                data: data,
+                success: function(data){
+                    console.log('**** sucess ***');
+                    console.log(JSON.stringify(data));
+                    location.reload();
+                }
+            });
+        });
+
+
+
+    });
+
+</script>
+
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-ui/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/popper.js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript"
+        th:src="@{/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js}"></script>
+<!-- waves js -->
+<script th:src="@{/resources/assets/pages/waves/js/waves.min.js}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/SmoothScroll.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<!-- Custom js -->
+<script th:src="@{/resources/assets/js/pcoded.min.js}"></script>
+<script th:src="@{/resources/assets/js/vertical-layout.min.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/script.js}"></script>
+<script type="text/javascript">
+    $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+        $(".alert").slideUp(500);
+    });
+    $(document).ready(function () {
+        deleteId = null;
+        $(".delConfirm").click(function () {
+            deleteId = this.id;
+        });
+
+        $("#deleteIt").click(function () {
+            var element = document.createElement('a');
+            element.setAttribute('href', '/existingsolution/delete/' + deleteId);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        });
+    });
+
+</script>
+
+</body>
+</html>

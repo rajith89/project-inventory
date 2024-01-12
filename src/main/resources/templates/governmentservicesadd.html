@@ -1,0 +1,390 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- <link rel="stylesheet" type="text/css" media="all" href="css/Base.css"
+        th:href="@{/resources/css/Base.css}" />
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script> -->
+    <title>Project Inventory </title>
+    <!-- <link rel="stylesheet"
+        href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" /> -->
+
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{/resources/img/icta.ico}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/bootstrap/css/bootstrap.min.css}">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/themify-icons/themify-icons.css}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/icofont/css/icofont.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/jquery.mCustomScrollbar.css}">
+
+
+</head>
+<body>
+
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img class="img-fluid" th:src="@{/resources/img/ICTA_banner.png}" style="width: 120px"/>
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+
+
+                        <li class="user-profile header-notification">
+                            <a href="#!" class="waves-effect waves-light">
+                                <!-- <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
+                                <span><i class="ti-user"></i></span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+
+                                <li class="waves-effect waves-light">
+                                    <a th:href="@{/logout}">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+
+                <div th:if="${!isAdmin}">
+                    <div th:replace="fragments/navbaruser :: navbar"></div>
+                </div>
+                <div th:if="${isAdmin}">
+                    <div th:replace="fragments/navbar :: navbar"></div>
+                </div>
+
+                <div class="pcoded-content">
+                    <!-- Page-header start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Government Services</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page-header end -->
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+
+                                <!-- Page body start -->
+                                <div class="page-body">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <div class="card">
+
+                                                <div class="card-block">
+
+                                                    <h4 class="sub-title">Connectivity Details</h4>
+
+                                                    <form autocomplete="off"
+                                                          th:action="@{/governmentservices/edit/{id}/{ins_id}(id=${governmentServicesDTO.id}, ins_id=${governmentServicesDTO.insId})}"
+                                                          th:object="${governmentServicesDTO}" role="form"
+                                                          enctype="utf8" th:method="post">
+
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Connectivity</label>
+                                                            <div class="col-sm-10">
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" th:value="LGN" th:field="*{connectivityType.LGN}">
+                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                        LGN
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" th:value="ADSL" th:field="*{connectivityType.ADSL}">
+                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                        ADSL
+                                                                    </label>
+                                                                </div>
+
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" th:value="dongle" th:field="*{connectivityType.dongle}">
+                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                        Dongle
+                                                                    </label>
+                                                                </div>
+
+<!--                                                                <ul>-->
+<!--                                                                    <li>-->
+<!--                                                                        <input class="form-control" type="checkbox" th:value="LGN" th:field="*{connectivityType.LGN}"/><span>LGN</span>-->
+<!--                                                                        <input class="form-control" type="checkbox" th:value="ADSL" th:field="*{connectivityType.ADSL}"/><span>ADSL</span>-->
+<!--                                                                        <input class="form-control" type="checkbox" th:value="dongle" th:field="*{connectivityType.dongle}"/><span>Dongle</span>-->
+<!--                                                                    </li>-->
+<!--                                                                </ul>-->
+
+<!--                                                                <select id="connectivity" th:field="*{connectivity}"-->
+<!--                                                                        name="connectivity" class="form-control">-->
+<!--                                                                    <option th:value="NONE" th:text="NONE"></option>-->
+<!--                                                                    <option th:value="LGN" th:text="LGN"></option>-->
+<!--                                                                    <option th:value="ADSL" th:text="ADSL"></option>-->
+<!--                                                                    <option th:value="Dongles"-->
+<!--                                                                            th:text="Dongles"></option>-->
+<!--                                                                    <option th:value="4G" th:text="4G"></option>-->
+<!--                                                                </select>-->
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Use LGN (Lanka
+                                                                Government Network)</label>
+                                                            <div class="col-sm-10">
+
+                                                                <select id="lgn" th:field="*{lgn}" name="lgn"
+                                                                        class="form-control">
+                                                                    <option th:value="Yes" th:text="Yes"></option>
+                                                                    <option th:value="No" th:text="No"></option>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Need Improvement for
+                                                                Connectivity</label>
+                                                            <div class="col-sm-10">
+
+                                                                <select id="cni" th:field="*{cni}" name="cni"
+                                                                        class="form-control">
+                                                                    <option th:value="Yes" th:text="Yes"></option>
+                                                                    <option th:value="No" th:text="No"></option>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <h4 class="sub-title">Hosting Details</h4>
+
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">connectivity</label>
+                                                            <div class="col-sm-10">
+                                                                <select id="hosting" th:field="*{hosting}"
+                                                                        name="Hosting" class="form-control">
+                                                                    <option th:value="NONE" th:text="NONE"></option>
+                                                                    <option th:value="Commercial_Cloud"
+                                                                            th:text="Commercial_Cloud"></option>
+                                                                    <option th:value="On-Premise"
+                                                                            th:text="On-Premise"></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Use LGC (Lanka
+                                                                Government Cloud)</label>
+                                                            <div class="col-sm-10">
+                                                                <select id="lgc" th:field="*{lgc}" name="lgn"
+                                                                        class="form-control">
+                                                                    <option th:value="Yes" th:text="Yes"></option>
+                                                                    <option th:value="No" th:text="No"></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Need Improvement for
+                                                                Hosting</label>
+                                                            <div class="col-sm-10">
+                                                                <select id="lni" th:field="*{hni}" name="hni"
+                                                                        class="form-control">
+                                                                    <option th:value="Yes" th:text="Yes"></option>
+                                                                    <option th:value="No" th:text="No"></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <h4 class="sub-title">Online Payment Services</h4>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Online Payment Services Name</label>
+                                                            <div class="col-sm-10">
+
+                                                                <input type="text" th:field="*{opsName}" class="form-control" id="opsName" placeholder="Payment Services Name" maxlength="255">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Payment Service URL</label>
+                                                            <div class="col-sm-10">
+
+                                                                <input type="text" th:field="*{opsUrl}" class="form-control" id="opsUrl" placeholder="Payment Services URL" maxlength="255">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Payment Service Status</label>
+                                                            <div class="col-sm-10">
+
+                                                                <input type="text" th:field="*{opsStatus}" class="form-control" id="opsStatus" placeholder="Payment Services Status" maxlength="255">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <h4 class="sub-title">SMS Services Details</h4>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">SMS Service Provider</label>
+                                                            <div class="col-sm-10">
+                                                                <select id="smsProvider" th:field="*{smsProvider}"
+                                                                        name="smsProvider" class="form-control">
+                                                                    <option th:value="NONE" th:text="NONE"></option>
+                                                                    <option th:value="ICTA-GovSMS"
+                                                                            th:text="ICTA-GovSMS"></option>
+                                                                    <option th:value="ISP"
+                                                                            th:text="ISP"></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">ISP Name (if ISP)</label>
+                                                            <div class="col-sm-10">
+
+                                                                <input type="text" th:field="*{smsProviderName}" class="form-control" id="smsProviderName" placeholder="If ISP Use, enter ISP name here" maxlength="255">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">SMS Service Status</label>
+                                                            <div class="col-sm-10">
+
+                                                                <input type="text" th:field="*{smsStatus}" class="form-control" id="smsStatus" placeholder="SMS Services Status" maxlength="255">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row m-t-30">
+                                                            <div class="col-md-12">
+                                                                <button th:text="Submit" type="submit"
+                                                                        class="btn btn-primary waves-effect waves-light">
+                                                                    Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <div th:if="${isAdmin}">
+                                                    <div class="row m-t-30">
+                                                        <div class="col-md-12">
+                                                            <button type="button"
+                                                                    class="btn btn-primary waves-effect waves-light"
+                                                                    id="back">
+                                                                Back
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-ui/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/popper.js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript"
+        th:src="@{/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js}"></script>
+<!-- waves js -->
+<script th:src="@{/resources/assets/pages/waves/js/waves.min.js}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/SmoothScroll.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<!-- Custom js -->
+<script th:src="@{/resources/assets/js/pcoded.min.js}"></script>
+<script th:src="@{/resources/assets/js/vertical-layout.min.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/script.js}"></script>
+
+<!--<script>-->
+<!--    $(document).on('click', '#back', function() {-->
+<!--    parent.history.back();-->
+<!--    //$.mobile.back();-->
+<!--    });-->
+<!--</script>-->
+
+</body>
+</html>

@@ -1,0 +1,399 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <title>Project Inventory </title>
+
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{/resources/img/icta.ico}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/bootstrap/css/bootstrap.min.css}">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/themify-icons/themify-icons.css}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/icofont/css/icofont.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/jquery.mCustomScrollbar.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/customcss.css}">
+
+</head>
+<body>
+
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img class="img-fluid" th:src="@{/resources/img/ICTA_banner.png}" style="width: 120px"/>
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+
+                        <li class="user-profile header-notification">
+                            <a href="#!" class="waves-effect waves-light">
+                                <span><i class="ti-user"></i></span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+
+                                <li class="waves-effect waves-light">
+                                    <a th:href="@{/logout}">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+                <div th:if="${!isAdmin}">
+                    <div th:replace="fragments/navbaruser :: navbar"></div>
+                </div>
+                <div th:if="${isAdmin}">
+                    <div th:replace="fragments/navbar :: navbar"></div>
+                </div>
+
+                <div class="pcoded-content">
+                    <!-- Page-header start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Institution Contact Details</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page-header end -->
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <div class="page-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card">
+                                                <div class="card-block">
+                                                    <h4 class="sub-title">Contact Details of the Institution</h4>
+                                                    <form autocomplete="off" name="institution"
+                                                          th:action="@{/institution/edit/{id}/{ins_id}(id=${institutionDto.id}, ins_id=${institutionDto.InstituteId})}"
+                                                          th:object="${institutionDto}" role="form" enctype="utf8"
+                                                          method="post">
+
+                                                        <h4 class="sub-title">Details of the Head of Organization</h4>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Name</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{nameHeadOfTheDept}"
+                                                                       class="form-control name-valid" id="nameHeadOfTheDept"
+                                                                       type="text"
+                                                                       placeholder="Name"
+                                                                       maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Title</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{titleHeadOfTheDept}" type="text"
+                                                                       class="form-control" placeholder="Title"
+                                                                       maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Address</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{addressHeadOfTheDept}" type="text"
+                                                                       class="form-control" placeholder="Address"
+                                                                       maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Email</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{emailHeadOfTheDept}" type="email"
+                                                                       class="form-control" placeholder="Email"
+                                                                       maxlength="255"/>
+                                                            </div>
+                                                            <div th:if="${#fields.hasErrors('emailHeadOfTheDept')}"
+                                                                 class="invalid-feedback"
+                                                                 th:errors="*{emailHeadOfTheDept}"></div>
+
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Phone
+                                                                Number</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{phoneHeadOfTheDept}"
+                                                                       name="phoneHeadOfTheDept"
+                                                                       type="text"
+                                                                       maxlength="10"
+                                                                       minlength="10"
+                                                                       class="form-control phone-number"
+                                                                       placeholder="Phone Number"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <h4 class="sub-title">Details of Director IT/ Head</h4>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Name</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{nameDirector}" type="text"
+                                                                       id="nameDirector" class="form-control name-valid"
+                                                                       placeholder="Name" maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Title</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{titleDirector}" type="text"
+                                                                       class="form-control" placeholder="Title"
+                                                                       maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Address</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{addressDirector}" type="text"
+                                                                       class="form-control" placeholder="Address"
+                                                                       maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Email</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{emailDirector}" type="email"
+                                                                       class="form-control"
+                                                                       placeholder="Email" maxlength="255"/>
+                                                            </div>
+                                                            <div th:if="${#fields.hasErrors('emailDirector')}"
+                                                                 class="invalid-feedback"
+                                                                 th:errors="*{emailDirector}"></div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Phone
+                                                                Number</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{phoneDirector}" type="text"
+                                                                       class="form-control phone-number"
+                                                                       maxlength="10"
+                                                                       minlength="10"
+                                                                       placeholder="Phone Number"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <h4 class="sub-title">Details of Primary Contact
+                                                            Person</h4>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Name</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{namePcp}" type="text"
+                                                                       class="form-control name-valid" placeholder="Name"
+                                                                       maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Title</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{titlePcp}" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="Title" maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Address</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{addressPcp}" type="text"
+                                                                       class="form-control"
+                                                                       placeholder="Address" maxlength="255"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Email</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{emailPcp}" type="email"
+                                                                       class="form-control"
+                                                                       placeholder="Email" maxlength="255"/>
+                                                            </div>
+                                                            <div th:if="${#fields.hasErrors('emailPcp')}"
+                                                                 class="invalid-feedback"
+                                                                 th:errors="*{emailPcp}"></div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Phone
+                                                                Number</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{phonePcp}" type="text"
+                                                                       maxlength="10"
+                                                                       minlength="10"
+                                                                       class="form-control phone-number"
+                                                                       placeholder="Phone Number"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <div th:if="${!isAdmin}">
+                                                            <div class="row m-t-30">
+                                                                <div class="col-md-12">
+                                                                    <button th:text="Submit" type="submit"
+                                                                            class="btn btn-primary waves-effect waves-light">
+                                                                        Submit
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div th:if="${isAdmin}">
+                                                            <div class="row m-t-30">
+                                                                <div class="col-md-12">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary waves-effect waves-light"
+                                                                            id="back">
+                                                                        Back
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-ui/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/popper.js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript"
+        th:src="@{/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js}"></script>
+<!-- waves js -->
+<script th:src="@{/resources/assets/pages/waves/js/waves.min.js}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/SmoothScroll.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<!-- Custom js -->
+<script th:src="@{/resources/assets/js/pcoded.min.js}"></script>
+<script th:src="@{/resources/assets/js/vertical-layout.min.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/script.js}"></script>
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function (){
+
+  $(".phone-number").keypress(function (e) {
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+               return false;
+    }
+   });
+
+    $('.name-valid').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z ]*$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        }
+        else
+        {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+$("form[name=institution]").validate({
+rules: {
+        phoneHeadOfTheDept: {
+            required: true,
+            maxlength: 10
+            }
+}
+
+});
+
+    $(document).on('click', '#back', function() {
+    parent.history.back();
+    //$.mobile.back();
+    });
+
+
+});
+
+</script>
+
+</body>
+</html>

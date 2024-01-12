@@ -1,0 +1,418 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Project Inventory </title>
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{/resources/assets/img/ICTA.jpg}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/bootstrap/css/bootstrap.min.css}">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/themify-icons/themify-icons.css}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/icofont/css/icofont.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/jquery.mCustomScrollbar.css}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script th:src="@{/webjars/popper.js/2.0.2/umd/popper.min.js}"></script>
+    <script th:src="@{/resources/js/scripts.js}"></script>
+
+</head>
+<body>
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img class="img-fluid" th:src="@{/resources/img/ICTA_banner.png}" style="width: 120px"/>
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+
+                        <li class="user-profile header-notification">
+                            <a href="#!" class="waves-effect waves-light">
+                                <!-- <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
+                                <span><i class="ti-user"></i></span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+
+                                <li class="waves-effect waves-light">
+                                    <a th:href="@{/logout}">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+                <div th:if="${!isAdmin}">
+                    <div th:replace="fragments/navbaruser :: navbar"></div>
+                </div>
+                <div th:if="${isAdmin}">
+                    <div th:replace="fragments/navbar :: navbar"></div>
+                </div>
+
+                <div class="pcoded-content">
+                    <!-- Page-header start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Improvements to Existing Solution</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page-header end -->
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+
+                                <!-- Page body start -->
+                                <div class="page-body">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <div class="card">
+
+                                                <div class="card-block">
+                                                    <h4 class="sub-title">Existing Projects</h4>
+                                                    <form autocomplete="off" th:action="@{/existingproject/}"
+                                                          th:object="${existingproj}" name="exprojectForm"
+                                                          id="exprojectForm" role="form" enctype="utf8" method="post">
+                                                        <input type="hidden" th:field="${existingproj.id}">
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Project / Solution
+                                                                Name<span class="required-star">*</span></label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                       id="solutionName" required name="solutionName"
+                                                                       th:field="${existingproj.solutionName}"
+                                                                       placeholder="Solution Name"
+                                                                       th:errorclass="is-invalid">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Description<span
+                                                                    class="required-star">*</span></label>
+                                                            <div class="col-sm-10">
+                                                                <textarea class="form-control form-control-sm" id="description" name="description" maxlength="250" placeholder="Description" th:required="required" th:field="${existingproj.description}"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Planned / Approved
+                                                                Budget / Estimate<span
+                                                                        class="required-star">*</span></label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                       required id="budget" name="budget" pattern="^[\d,]+$"
+                                                                       th:field="${existingproj.budget}"
+                                                                       placeholder="Budget" th:errorclass="is-invalid">
+                                                                <span class="help-block"><i>* Format: 10,000,000 LKR</i></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label" for="existingSol">Existing IT solution<span
+                                                                    class="required-star">*</span></label>
+                                                            <div class="col-sm-10">
+                                                                <div class="col-sm-10">
+                                                                    <select class="form-control"
+                                                                            id="existingSol"
+                                                                            required
+                                                                            style="margin-top:10px"
+                                                                            th:field="${existingproj.existingSolution}"
+                                                                            th:errorclass="is-invalid">
+                                                                        <option th:each="proj : ${existingsolutions}" th:value="${proj.id}" th:text="${proj.solutionName}" >
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                        <div class="field_wrapper">
+                                                            <div>
+
+                                                                <div class="card" style="width: 75%">
+                                                                    <div class="card-header dynamic-update-rows">
+                                                                        <h4 class="sub-title">Add Sub Procurements</h4>
+                                                                        <div class="card-header-right">
+                                                                            <div th:if="${!isAdmin}">
+                                                                            <button type="button" name="addsubprocrement" class="add_button" data-dynamic-update-rows-url="/existingproject/addsubprocrement">Add New
+                                                                                <i class="ti-plus" style="color: #7fabf6"></i>
+                                                                            </button>
+                                                                            </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    <div class="card-block">
+                                                                        <table class="table dynamic-update-rows" style="width: 100%">
+
+                                                                            <tbody id="dynamicTableContents">
+                                                                            <tr th:fragment="subProcurementsList"
+                                                                                th:each="subProcurement,rowStat :  ${subProcurementDto.getSubProcurements()}">
+                                                                                <!--<td th:text="${rowStat.count}">1</td>-->
+
+                                                                                <td>
+                                                                                    #<span th:text="${rowStat.count}">1</span>
+                                                                                    <div class="form-group form-inline">
+                                                                                        <input type="hidden" th:field="${existingproj.subProcurements[__${rowStat.index}__].id}">
+                                                                                    </div>
+
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="solName">Solution Name<span class="required-star">*</span></label>
+                                                                                        <input class="form-control"  placeholder="Solution Name" required id="solName"
+                                                                                           th:field="${existingproj.subProcurements[__${rowStat.index}__].solutionName}"
+                                                                                           th:errorclass="is-invalid" />
+                                                                                    </div>
+
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="descr">Description<span class="required-star">*</span></label>
+                                                                                        <textarea class="form-control" id="descr" rows="4" cols="50" name="description" maxlength="250" placeholder="Brief Description" th:required="required" th:field="${existingproj.subProcurements[__${rowStat.index}__].description}"></textarea>
+                                                                                    </div>
+
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="planbudget">Planned/Approved Budget/Estimate<span class="required-star">*</span></label>
+                                                                                    <input class="form-control budget-class" placeholder="Planned/Approved Budget/Estimate" required id="planbudget" type="text"
+                                                                                           th:field="${existingproj.subProcurements[__${rowStat.index}__].budget}" pattern="^[\d,]+$"
+                                                                                           th:errorclass="is-invalid" />
+                                                                                        <span class="help-block"><i>* Format: 10,000,000 LKR</i></span>
+                                                                                    </div>
+
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="procstate">State of Procurement<span class="required-star">*</span></label>
+                                                                                        <input class="form-control" required id="procstate"
+                                                                                               th:field="${existingproj.subProcurements[__${rowStat.index}__].state}" style="margin-top:10px"
+                                                                                               th:errorclass="is-invalid" placeholder="State of Procurement"/>
+                                                                                    </div>
+
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="procType">Procurement Types<span class="required-star">*</span></label>
+                                                                                        <select class="form-control" style="margin-top:10px" id="procType" required
+                                                                                                th:field="${existingproj.subProcurements[__${rowStat.index}__].type}"
+                                                                                                th:errorclass="is-invalid">
+                                                                                            <option selected="selected" readonly value="">Procurement Types</option>
+                                                                                            <option value="Goods">Goods</option>
+                                                                                            <option value="Services">Services</option>
+                                                                                            <option value="Consultancy">Consultancy</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="procEntity">Procurement Entity<span class="required-star">*</span></label>
+                                                                                        <select class="form-control"
+                                                                                                th:field="${existingproj.subProcurements[__${rowStat.index}__].entity}" id="procEntity" required
+                                                                                                th:errorclass="is-invalid">
+                                                                                            <option selected="selected" readonly value="">Procurement Entity</option>
+                                                                                            <option value="Department">Department</option>
+                                                                                            <option value="Ministry">Ministry</option>
+                                                                                            <option value="Cabinet">Cabinet</option>
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="proCompletionDate">Planned Procurement completion date<span class="required-star">*</span></label>
+                                                                                        <input class="form-control" required type="date" name="proCompletionDate" id="proCompletionDate"
+                                                                                               th:field="${existingproj.subProcurements[__${rowStat.index}__].proCompletionDate}" style="margin-top:10px"
+                                                                                               th:errorclass="is-invalid" placeholder="Planned Procurement completion date"/>
+                                                                                    </div>
+
+
+
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="implCompletionDate">Implementation Completion Date<span class="required-star">*</span></label>
+                                                                                    <input class="form-control" placeholder="Implementation Completion Date" required type="date" name="implCompletionDate" id="implCompletionDate"
+                                                                                           th:field="${existingproj.subProcurements[__${rowStat.index}__].implCompletionDate}" style="margin-top:10px"
+                                                                                           th:errorclass="is-invalid" />
+                                                                                    </div>
+                                                                                    <div class="form-group form-inline">
+                                                                                        <label style="margin-right:10px" for="supplierName">Supplier Name<span class="required-star">*</span></label>
+                                                                                    <input class="form-control" placeholder="Supplier Name" required id="supplierName"
+                                                                                           th:field="${existingproj.subProcurements[__${rowStat.index}__].supplierName}" style="margin-top:10px"
+                                                                                           th:errorclass="is-invalid" />
+                                                                                    </div>
+                                                                                    <!--<div class="form-group form-inline" sec:authorize="hasAnyAuthority('USER')">-->
+                                                                                        <!--<label style="margin-right:10px" for="comment">Comment<span class="required-star">*</span></label>-->
+                                                                                        <!--<input class="form-control" placeholder="ICTA Comment" required id="comment"-->
+                                                                                               <!--th:field="${existingproj.subProcurements[__${rowStat.index}__].comment}" style="margin-top:10px"-->
+                                                                                               <!--th:errorclass="is-invalid" />-->
+                                                                                    <!--</div>-->
+                                                                                    <div class="form-group form-inline" sec:authorize="hasAnyAuthority('USER')" >
+                                                                                        <label style="margin-right:10px" for="comment">Comment<span
+                                                                                                class="required-star">*</span></label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <textarea class="form-control form-control-sm" disabled id="comment" rows="5" cols="50" name="comment" maxlength="250" placeholder="ICTA Comment" th:required="required"  th:field="${existingproj.subProcurements[__${rowStat.index}__].comment}"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div th:if="${!isAdmin}">
+                                                                                        <div class="remove_button"><span>
+                                                                                        <button type="button" name="removeDynamicRow"
+                                                                                                th:value="${rowStat.index}" class="btn waves-effect waves-light btn-danger btn-outline-danger"
+                                                                                                data-dynamic-update-rows-url="/existingproject/removesubprocrement">
+                                                                                           <i class="ti-close"></i>Remove
+                                                                                        </button>
+                                                                                        </span>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                            <div class="row m-t-30">
+                                                                <div class="col-md-2" sec:authorize="hasAnyAuthority('USER')">
+                                                                    <button th:text="Save"  type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                <button type="button"
+                                                                        class="btn btn-primary waves-effect waves-light"
+                                                                        id="back">
+                                                                    Back
+                                                                </button>
+                                                            </div>
+                                                            </div>
+
+                                                    </form>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        document.getElementById('budget').addEventListener('input', event =>
+        event.target.value = (parseInt(event.target.value.replace(/[^\d]+/gi, '')) || 0).toLocaleString('en-US')
+    );
+
+        var targetNode = document.body;
+        var config = { childList: true, subtree: true };
+        const callback = function(mutationsList, observer) {
+            for(var mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    var elements = document.getElementsByClassName('budget-class');
+                    for (i = 0; i < elements.length; i++) {
+                        elements[i].addEventListener('input', event =>
+                        event.target.value = (parseInt(event.target.value.replace(/[^\d]+/gi, '')) || 0).toLocaleString('en-US'));
+                    }
+                }
+            }
+        };
+
+        var observer = new MutationObserver(callback);
+        observer.observe(targetNode, config);
+
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-ui/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/popper.js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript"
+        th:src="@{/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js}"></script>
+<!-- waves js -->
+<script th:src="@{/resources/assets/pages/waves/js/waves.min.js}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/SmoothScroll.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<!-- Custom js -->
+<script th:src="@{/resources/assets/js/pcoded.min.js}"></script>
+<script th:src="@{/resources/assets/js/vertical-layout.min.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/script.js}"></script>
+
+<script type="text/javascript">
+$(document).ready(function (){
+
+       $(document).on('click', '#back', function() {
+    parent.history.back();
+    //$.mobile.back();
+    });
+
+    });
+</script>
+
+</body>
+</html>

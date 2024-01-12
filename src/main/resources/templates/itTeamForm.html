@@ -1,0 +1,281 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script> -->
+    <title>Project Inventory </title>
+    <!--  <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" th:href="@{/static/css/noFound.css}"/>
+     <link rel="stylesheet" type="text/css" th:href="@{/resources/font_awesome/css/all.min.css}"/> -->
+
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/2.0.2/umd/popper.min.js}"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{/resources/img/icta.ico}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/bootstrap/css/bootstrap.min.css}">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/themify-icons/themify-icons.css}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/icofont/css/icofont.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/jquery.mCustomScrollbar.css}">
+
+</head>
+<body>
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                    <input type="text" minlength="1" maxlength="100" class="form-control"
+                                           placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img class="img-fluid" th:src="@{/resources/img/ICTA_banner.png}" style="width: 120px"/>
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+
+                        <li class="user-profile header-notification">
+                            <a href="#!" class="waves-effect waves-light">
+                                <!-- <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
+                                <span><i class="ti-user"></i></span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+
+                                <li class="waves-effect waves-light">
+                                    <a th:href="@{/logout}">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+                <div sec:authorize="hasAnyAuthority('USER')">
+                    <div th:replace="fragments/navbaruser :: navbar"></div>
+                </div>
+                <div sec:authorize="hasAnyAuthority('ADMIN')">
+                    <div th:replace="fragments/navbar :: navbar"></div>
+                </div>
+
+                <div class="pcoded-content">
+                    <!-- Page-header start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">IT HR Capacity</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page-header end -->
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+
+                                <!-- Page body start -->
+                                <div class="page-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <div class="card">
+
+                                                <div class="card-block">
+                                                    <h4 class="sub-title">Classification of IT Team</h4>
+
+                                                    <form autocomplete="off"
+                                                          th:action="${isAdd} ? @{/itUnit/staff/save} : @{/itUnit/staff/{id}/edit (id=${itUnitTeamClassification.id})}"
+                                                          th:object="${itUnitTeamClassification}" method="post"
+                                                          name="exprojectForm" id="exprojectForm" role="form"
+                                                          enctype="utf8">
+                                                        <input type="hidden" th:field="*{id}" id="blogId">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Staff
+                                                                Category<span class="required-star">*</span>
+                                                            </label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" minlength="1" maxlength="100"
+                                                                       class="form-control form-control-sm"
+                                                                       id="staffCategory" required name="staffCategory"
+                                                                       th:field="*{staffCategory}"
+                                                                       placeholder="Staff Category"
+                                                                       th:errorclass="is-invalid">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Highest
+                                                                Education Level qualification<span
+                                                                        class="required-star">*</span>
+                                                            </label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" minlength="1" maxlength="100"
+                                                                       class="form-control form-control-sm"
+                                                                       id="eduQualification" required
+                                                                       name="eduQualification"
+                                                                       th:field="*{eduQualification}"
+                                                                       placeholder="Highest Education Level qualification"
+                                                                       th:errorclass="is-invalid">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Highest
+                                                                Professional IT qualification<span
+                                                                        class="required-star">*</span>
+                                                            </label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" minlength="1" maxlength="100"
+                                                                       class="form-control form-control-sm"
+                                                                       id="profQualification" required
+                                                                       name="profQualification"
+                                                                       th:field="*{profQualification}"
+                                                                       placeholder="Highest Professional IT qualification"
+                                                                       th:errorclass="is-invalid">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row m-t-30">
+                                                            <div class="col-md-12">
+                                                                <button th:text="Submit" type="submit"
+                                                                        class="btn btn-primary waves-effect waves-light">
+                                                                    Submit
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog" style="position: relative;top: 40%;transform: translateY(-50%);">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this record?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="deleteIt" type="button" class="btn btn-default" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	deleteId = null;
+	$(".delConfirm").click(function() {
+		deleteId = this.id;
+	});	
+	
+	$("#deleteIt").click(function() {
+		var element = document.createElement('a');
+		element.setAttribute('href', '/ministryManagement/delete/' + deleteId + '/');
+		element.style.display = 'none';
+		document.body.appendChild(element);
+		element.click();
+		document.body.removeChild(element);
+	});	
+	
+	$("#alert-box").fadeTo(2000, 500).slideUp(500, function() {
+	      $("#alert-box").slideUp(500);
+	 });
+});
+	
+
+</script>
+
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-ui/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/popper.js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript"
+        th:src="@{/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js}"></script>
+<!-- waves js -->
+<script th:src="@{/resources/assets/pages/waves/js/waves.min.js}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/SmoothScroll.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<!-- Custom js -->
+<script th:src="@{/resources/assets/js/pcoded.min.js}"></script>
+<script th:src="@{/resources/assets/js/vertical-layout.min.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/script.js}"></script>
+
+</body>
+</html>

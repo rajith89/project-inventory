@@ -1,0 +1,226 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script> -->
+    <title>Project Inventory </title>
+    <!--     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/> -->
+
+
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{/resources/img/icta.ico}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/bootstrap/css/bootstrap.min.css}">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/themify-icons/themify-icons.css}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/icofont/css/icofont.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/jquery.mCustomScrollbar.css}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--     <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/pages/notification/notification.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/animate.css/css/animate.css}"> -->
+
+<!--    <script>-->
+<!--        $(function(){-->
+<!--            $("#includedContent").load("navbaruser.html");-->
+<!--        });-->
+<!--    </script>-->
+
+</head>
+<body>
+<!-- <header>
+    Logo starts
+    <div class="logo">
+        <a href="#"> <img src="resources/img/logo.png" alt="logo"><span
+                class="menu-toggle"> <i class="fa fa-bars"></i>
+		</span>
+        </a>
+    </div>
+    Logo ends
+    Mini right nav starts
+</header> -->
+
+<!-- <div class="container"><br/>
+    <div class="alert alert-success">
+        <p>its working as expected</p>
+        <div th:text="${userName}" id="scheduler"></div>
+        <div th:text="${adminMessage}"></div>
+    </div>
+    <a th:href="@{/login}" class="btn btn-info" role="button">Logout</a>
+</div>
+ -->
+
+
+
+
+<!-- Pre-loader end -->
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img class="img-fluid" th:src="@{/resources/img/ICTA_banner.png}" style="width: 120px"/>
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+
+                        <li class="user-profile header-notification">
+                            <a href="#!" class="waves-effect waves-light">
+                                <!-- <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
+                                <span th:text="${userName}"></span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+
+                                <li class="waves-effect waves-light">
+                                    <a th:href="@{/logout}">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+                <div th:if="${!isAdmin}">
+                    <div th:replace="fragments/navbaruser :: navbar"></div>
+                </div>
+                <div th:if="${isAdmin}">
+                    <div th:replace="fragments/navbar :: navbar"></div>
+                </div>
+
+                <div class="pcoded-content">
+                    <!-- Page-header start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">Dashboard</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page-header end -->
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+
+                                <!-- Page body start -->
+                                <div class="page-body">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- Basic Form Inputs card start -->
+                                            <div class="card">
+
+                                                <div class="card-block">
+
+                                                    <h1>Welcome</h1><br/>
+                                                        <h6>ICT Procurements for 2021-2022</h6><br/>
+
+                                                    <p style="font-size:120%;">
+                                                        This is with reference to the Circular Nos PS/GPA/Circular/01/2020 dated and 13th January 2020 and PS/SP/Circular/05/2021 dated 02nd March 2021 (the “Circulars”) issued by the Presidential Secretariat conveying the direction of H.E. the President regarding the above subject.<br/><br/>
+
+                                                        The Circulars mentioned at the outset indicate a report to be submitted by Government institutions to the Presidential Secretariat with information pertaining to each of their respective ICT initiatives. The Circulars further direct ICTA to assess such ICT initiatives with the objective of ensuring, amongst other things, interoperability of systems, avoiding duplication and sharing of experiences of one organization with another.<br/><br/>
+
+                                                        Therefore, we would request and appreciate if the related information as requested for by the Circulars be communicated to ICTA, in order for ICTA to prepare a comprehensive report to the Secretary to His Excellency, President of Sri Lanka. In furtherance of this process and for your convenience, ICTA has developed this online form which would assist you to provide the requested information, and enable ICTA to compile a complete list of digital solutions being implemented by Government institutions as a whole.<br/><br/>
+
+                                                        Mr. Gavashkar Subramanium, Director, Government Engagement (Acting), ICTA, can be contacted on email: gavash@icta.lk or on Mobile +9477 318 4830 to provide for any further clarifications and assistance in this regard.<br/><br/>
+
+                                                        Thank you,<br/>
+                                                    </p>
+                                                        <h6>ICT Agency of Sri Lanka</h6>
+
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-ui/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/popper.js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript"
+        th:src="@{/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js}"></script>
+<!-- waves js -->
+<script th:src="@{/resources/assets/pages/waves/js/waves.min.js}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/SmoothScroll.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+
+<!-- Custom js -->
+<script th:src="@{/resources/assets/js/pcoded.min.js}"></script>
+<script th:src="@{/resources/assets/js/vertical-layout.min.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/script.js}"></script>
+
+</body>
+</html>

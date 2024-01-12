@@ -1,0 +1,37 @@
+.fielset-upload{
+	    display: flex;
+    align-items: baseline;
+}
+
+.container{
+    width: 100%;
+    display: flex;	
+}
+
+.make-link-file-download{
+	 background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.main-pdf-div{
+	display: flex;
+    padding: 18px;
+    align-items: center;
+}
+
+.image-component{
+	    margin-right: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .body {
+        padding: 20px;
+    }
+}

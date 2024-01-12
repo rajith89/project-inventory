@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+	<title>Project Inventory </title>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+</head>
+<body class="bg-cyan">
+	<div class="container">
+	
+	<div class="alert alert-info">
+        <!--<div th:text="${successMessage}"></div>-->
+        <strong>Project Inventory </strong>
+        <!--<div th:text="${userName}" id="scheduler"></div>-->
+    </div>
+
+		<div class="panel panel-success">
+			<div class="panel-heading">Ministry</div>
+			<div class="panel-body">
+				<form autocomplete="off" th:action="@{/createInstitute/edit/{id}/(id=${ministryDto.id})}"
+					th:object="${ministryDto}" role="form" enctype="utf8"
+					method="post">
+					<div class="row">
+						<div class="form-group col-md-8">
+							<label for="name" class="col-form-label">Ministry Name</label> <input
+								type="text" th:field="*{name}" class="form-control"
+								id="name" placeholder="Name"> <span
+								th:if="${#fields.hasErrors('name')}"
+								th:errors="*{name}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-8">
+							<label for="name" class="col-form-label">Status</label> <input
+								type="text" th:field="*{status}" class="form-control"
+								id="name" placeholder="Status"> <span
+								th:if="${#fields.hasErrors('name')}"
+								th:errors="*{status}" class="text-danger"></span>
+						</div>
+
+						
+						<div class="col-md-6 pull-right">
+							<input type="submit" class="btn btn-primary"
+								value="Update">
+						</div>
+
+					</div>
+
+
+
+					<!--<label for="components">components</label>-->
+					<!--<input type="text" th:field="*{components}" id="components" placeholder="components">-->
+					<!--<span th:if="${#fields.hasErrors('components')}" th:errors="*{components}"></span>-->
+					<!--<input type="submit" value="Add Solution">-->
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>

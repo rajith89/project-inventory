@@ -1,0 +1,289 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <title>Project Inventory </title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/2.0.2/umd/popper.min.js}"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <title th:text="#{label.form.title}">form</title>
+    <title th:text="#{label.form.title}">form</title>
+
+    <!-- Favicon icon -->
+    <link rel="icon" th:href="@{/resources/img/icta.ico}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/bootstrap/css/bootstrap.min.css}">
+    <!-- waves.css -->
+    <link rel="stylesheet" th:href="@{/resources/assets/pages/waves/css/waves.min.css}" type="text/css" media="all">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/themify-icons/themify-icons.css}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/icofont/css/icofont.css}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/icon/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.passwordRequirements.css}">
+
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/resources/assets/css/jquery.mCustomScrollbar.css}">
+
+</head>
+<body>
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <div class="mobile-search waves-effect waves-light">
+                        <div class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                    <input type="text" class="form-control" placeholder="Enter Keyword">
+                                    <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img class="img-fluid" th:src="@{/resources/img/ICTA_banner.png}" style="width: 120px"/>
+                    </a>
+                    <a class="mobile-options waves-effect waves-light">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+
+                        <li class="user-profile header-notification">
+                            <a href="#!" class="waves-effect waves-light">
+                                <span><i class="ti-user"></i></span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+
+                                <li class="waves-effect waves-light">
+                                    <a th:href="@{/logout}">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+
+                <div th:if="${!isAdmin}">
+                    <div th:replace="fragments/navbaruser :: navbar"></div>
+                </div>
+                <div th:if="${isAdmin}">
+                    <div th:replace="fragments/navbar :: navbar"></div>
+                </div>
+
+                <div class="pcoded-content">
+                    <!-- Page-header start -->
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="page-header-title">
+                                        <h5 class="m-b-10">User Registration</h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Page-header end -->
+                    <div class="pcoded-inner-content">
+                        <!-- Main-body start -->
+                        <div class="main-body">
+                            <div class="page-wrapper">
+
+                                <!-- Page body start -->
+                                <div class="page-body">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <div class="card">
+
+                                                <div class="card-block">
+                                                    <h4 class="sub-title">Update Profile</h4>
+                                                    <div class="card-block table-border-style">
+                                                        <div id="alert-box" th:if="${message}" th:text="${message}"
+                                                             th:class="${'alert ' + alertClass}"/>
+                                                    </div>
+                                                    <form autocomplete="off"
+                                                          th:action="@{/user/update/{id}/(id=${existingUser.id})}"
+                                                          th:object="${existingUser}" role="form" enctype="utf8"
+                                                          method="post">
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">First Name</label>
+                                                            <div class="col-sm-10">
+                                                                <input th:field="*{firstName}" type="text"
+                                                                       name="user-name" class="form-control"
+                                                                       th:required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <input type="hidden" th:field="*{userName}"
+                                                               name="user-name" class="form-control"
+                                                               th:required="required">
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Last Name</label>
+                                                            <div class="col-sm-10">
+                                                                <input type="text" minlength="1" maxlength="100"
+                                                                       th:field="*{lastName}" name="user-name"
+                                                                       class="form-control" th:required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Password<span
+                                                                    class="required-star" minlength="8"
+                                                                    required="required">*</span></label>
+                                                            <div class="col-sm-10">
+                                                                <input autocomplete="false" th:field="*{password}"
+                                                                       type="password" name="password" id="password"
+                                                                       class="form-control pr-password"
+                                                                       th:required="required">
+                                                                <span th:if="${#fields.hasErrors('password')}"
+                                                                      th:errors="*{password}"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2 col-form-label">Confirm Password<span
+                                                                    class="required-star">*</span></label>
+                                                            <div class="col-sm-10">
+                                                                <input type="password" autocomplete="false"
+                                                                       th:field="*{matchingPassword}"
+                                                                       name="confirm-password" id="confirm-password"
+                                                                       class="form-control" th:required="required">
+                                                                <div style="margin-top: 7px;"
+                                                                     id="CheckPasswordMatch"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row m-t-30">
+                                                            <div class="col-md-12">
+                                                                <div class="col-md-12">
+
+                                                                    <button th:text="Cancel" type="button" id="back"
+                                                                            class="btn btn-primary waves-effect waves-light">
+                                                                        Cancel
+                                                                    </button>
+
+                                                                    <button id="btn-signup" type="submit"
+                                                                            class="btn btn-primary waves-effect waves-light"
+                                                                            disabled>Update User
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-ui/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/popper.js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js}"></script>
+<!-- waves js -->
+<script th:src="@{/resources/assets/pages/waves/js/waves.min.js}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" th:src="@{/resources/assets/js/SmoothScroll.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<!-- Custom js -->
+<script th:src="@{/resources/assets/js/pcoded.min.js}"></script>
+<script th:src="@{/resources/assets/js/vertical-layout.min.js}"></script>
+<script th:src="@{/resources/assets/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/assets/js/script.js}"></script>
+
+
+<!-- JQuery -->
+<script type="text/javascript" th:src="@{/resources/js/jquery.passwordRequirements.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/js/jquery.passwordRequirements.js}"></script>
+
+<script type="text/javascript">
+$(document).ready(function (){
+	$('#btn-signup').prop("disabled",true);
+    $(".pr-password").passwordRequirements();
+
+    $("#confirm-password").on('keyup', function(){
+    var password = $("#password").val();
+    var confirmPassword = $("#confirm-password").val();
+    if (password != confirmPassword){
+        $("#CheckPasswordMatch").html("Password does not match !").css("color","red");
+        $('#btn-signup').prop("disabled",true);
+    } else{
+        $("#CheckPasswordMatch").html("Password match !").css("color","green");
+    	$('#btn-signup').prop("disabled",false);
+    }
+    
+   });
+    $("#alert-box").fadeTo(2000, 500).slideUp(500, function () {
+        $("#alert-box").slideUp(500);
+    });
+
+      $(document).on('click', '#back', function() {
+    parent.history.back();
+    //$.mobile.back();
+    });
+});
+
+
+</script>
+
+
+</body>
+
+</html>
